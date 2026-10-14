@@ -224,54 +224,99 @@ The architecture diagram illustrates the project's intended service flow and Kaf
 
 ---
 
-## 🔐 Environment Configuration
+## 💻 Local Setup (Windows)
 
-Before starting the backend, copy the environment template and set your own local database credentials:
+### Prerequisites
 
-```powershell
-Copy-Item alternate_credit_backend/.env.example alternate_credit_backend/.env
-```
-
-Edit `alternate_credit_backend/.env` and replace the placeholder password with your local MySQL password. Never commit a real `.env` file or database credentials.
-
-## 🚀 How to Run
+Install Git, Python 3.12, Node.js, and Docker Desktop. Start Docker Desktop before launching the backend services.
 
 ### 1. Clone the repository
 
-```bash
+```powershell
 git clone https://github.com/Rishi-1612/AI-credit-scoring-system.git
 cd AI-credit-scoring-system
 ```
 
-### 2. Start the backend services
+### 2. Configure environment variables
 
-```bash
+```powershell
+Copy-Item alternate_credit_backend/.env.example alternate_credit_backend/.env
+notepad alternate_credit_backend/.env
+```
+
+Set `DB_PASSWORD` and `MYSQL_PASSWORD` to a local development password (use the same value initially). Do not commit `alternate_credit_backend/.env`.
+
+### 3. Start MySQL and Kafka
+
+```powershell
 cd alternate_credit_backend
+docker compose config
 docker compose up -d
+docker compose ps
 ```
 
-### 3. Install Python dependencies and start the API
+Wait until MySQL and Kafka are healthy. To inspect startup logs:
 
-Run these commands from the `alternate_credit_backend` directory:
+```powershell
+docker compose logs --tail 100 mysql kafka kafka-init
+```
 
-```bash
+### 4. Install backend dependencies
+
+Keep this terminal in `alternate_credit_backend`:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
 pip install -r requirements.txt
-uvicorn app.main:app --reload
+python -m scripts.init_auth_db
 ```
 
-### 4. Start the frontend
+If PowerShell blocks activation, run `Set-ExecutionPolicy -Scope Process Bypass` in that terminal, then activate the environment again.
 
-Open a new terminal from the repository root:
+### 5. Start the API
 
-```bash
-cd alternate_credit_frontend
+```powershell
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+Check these URLs:
+- API health: http://127.0.0.1:8000/
+- Interactive API docs: http://127.0.0.1:8000/docs
+
+The health endpoint should return `{"status":"ok","message":"API is running"}`.
+
+### 6. Start the frontend
+
+Open a second PowerShell terminal from the repository root:
+
+```powershell
+cd AI-credit-scoring-system\alternate_credit_frontend
 npm install
 npm run dev
 ```
 
-Check the backend configuration and environment variables before running the application locally. Some services may require additional setup depending on your environment.
+Open the local URL printed by Vite (normally http://localhost:5173).
 
----
+### Optional: Chatbot
+
+The chatbot is a separate API on port 8999 and requires a Groq API key. Add `GROQ_API_KEY=your_key_here` to your local `alternate_credit_backend/.env`, then, in a separate terminal:
+
+```powershell
+cd AI-credit-scoring-system\alternate_credit_backend
+.\.venv\Scripts\Activate.ps1
+pip install -r chatbot/requirements.txt
+pip install groq
+cd chatbot
+python app_chaty.py
+```
+
+### Current setup limitations
+
+- The Compose file provides local MySQL and Kafka infrastructure. The auth initialization script creates the authentication `users` table.
+- The application also queries project-specific MySQL tables such as `individual_manager_review_data`, `msme_manager_review_data`, `msme_final_decision`, and raw SHAP tables. Their complete MySQL DDL/migrations are not currently included in this repository, so dashboard and application-submission flows may still need schema initialization.
+- Kafka scoring, explainability, and PDF workers are separate Python processes. The API's health endpoint verifies the web API, not that every background worker or full scoring flow is running.
 
 ## 📄 License
 
