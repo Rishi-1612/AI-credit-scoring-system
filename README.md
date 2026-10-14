@@ -224,6 +224,16 @@ The architecture diagram illustrates the project's intended service flow and Kaf
 
 ---
 
+## 🔐 Environment Configuration
+
+Before starting the backend, copy the environment template and set your own local database credentials:
+
+```powershell
+Copy-Item alternate_credit_backend/.env.example alternate_credit_backend/.env
+```
+
+Edit `alternate_credit_backend/.env` and replace the placeholder password with your local MySQL password. Never commit a real `.env` file or database credentials.
+
 ## 🚀 How to Run
 
 ### 1. Clone the repository
