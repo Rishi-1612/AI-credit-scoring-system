@@ -40,17 +40,17 @@ The system processes structured financial data (simulating Account Aggregator fl
 
 ### 🔹 Responsible Data Processing
 - Removes **protected attributes** (gender, religion, etc.)
-- Ensures **fairness and unbiased evaluation**
+- Evaluates potential fairness concerns in model decisions
 
 ---
 
 ### 🔹 Advanced Feature Engineering
 - Raw data is transformed into **handcrafted features**
 - Captures:
-  - Income stability  
-  - Financial behavior  
-  - Asset-liability balance  
-  - Social and behavioral signals  
+  - Income stability
+  - Financial behavior
+  - Asset-liability balance
+  - Social and behavioral signals
 
 ---
 
@@ -61,24 +61,22 @@ Built using:
 - **LightGBM**
 
 👉 Outputs:
-- Risk score  
-- Loan decision  
-- Suggested interest rate & principal  
+- Risk score
+- Loan decision
+- Suggested interest rate & principal
 
 ---
 
 ### 🔹 Explainable AI (SHAP)
-- Every decision is **interpretable**
-- Shows feature-level contribution for each applicant
+- Provides feature-level explanations for model predictions
+- Helps reviewers inspect factors contributing to an applicant's score
 
 ---
 
 ### 🔹 Human-in-the-Loop System
 - Managers can:
-  - Accept model decision  
-  - Override decisions if necessary  
-
-👉 Ensures real-world practicality and trust
+  - Accept model decisions
+  - Override decisions when necessary
 
 ---
 
@@ -87,88 +85,77 @@ Built using:
 #### 👤 Customer Interface
 - Upload financial JSON (Account Aggregator simulation)
 - View:
-  - Credit score  
-  - Decision  
-  - Personalized report  
+  - Credit score
+  - Decision
+  - Personalized report
 
 #### 🧑‍💼 Manager Interface
-- Review applications  
-- View SHAP explanations  
-- Override decisions  
-- Generate reports  
+- Review applications
+- View SHAP explanations
+- Override decisions
+- Generate reports
 
 ---
 
 ### 🔹 Automated PDF Reports
-- 📄 Customer Report  
-- 📄 Manager Report  
+- Customer report
+- Manager report
 
 Includes:
-- Decision summary  
-- Risk insights  
-- Loan details  
-- Explanation  
+- Decision summary
+- Risk insights
+- Loan details
+- Explanation
 
 ---
 
 ### 🔹 AI Chatbot 🤖
-An intelligent assistant that can:
-- Explain **why an applicant was rejected**
-- Compare **multiple applicants**
-- Help customers understand their reports  
-- Assist managers with decision insights  
-- Answer finance-related queries  
+An assistant designed to:
+- Explain why an applicant was rejected
+- Compare multiple applicants
+- Help customers understand their reports
+- Assist managers with decision insights
+- Answer finance-related queries
 
 ---
 
 ### 🔹 Event-Driven Architecture (Kafka)
 
-The system uses **Apache Kafka** as its backbone:
+The project includes an Apache Kafka-based messaging setup intended to support event-driven processing between services.
 
-- ⚡ Asynchronous processing  
-- 🔗 Loose coupling between services  
-- 🛡 Fault tolerance  
-- 📈 High scalability  
+- Asynchronous message processing
+- Loose coupling between services
+- Kafka topics for service communication
 
-👉 Each service:
-- Consumes from a topic  
-- Publishes to another topic  
-
-👉 Even if a service fails:
-- System continues running  
-- No data loss (Kafka persists data)
+Actual reliability and data-loss guarantees depend on Kafka configuration, consumer behaviour, and service implementation.
 
 ---
 
 ### 🔹 Audit Trail & Compliance
-- Stores:
-  - Customer data  
-  - Model outputs  
-  - Manager decisions  
-  - Governance metadata  
+The project includes audit-related components for tracking information such as:
+- Customer data
+- Model outputs
+- Manager decisions
+- Governance metadata
 
-👉 Enables:
-- Regulatory compliance  
-- Risk tracking  
-- Transparency  
+The presence of these components does not by itself establish regulatory compliance.
 
 ---
 
-### 🔹 Feature Store (Continuous Learning)
-- Engineered features are stored  
-- Used for:
-  - Future model retraining  
-  - Performance improvement  
+### 🔹 Feature Store (Future Scope)
+Engineered features could be stored for:
+- Future model retraining
+- Model monitoring and improvement
 
 ---
 
 ## 🏗️ System Architecture
 
 <p align="center">
-  <img src="assets/system_architecture.png" width="900"/>
+  <img src="assets/system_architecture.png" width="900" alt="MonarchCredit system architecture"/>
 </p>
 
-Kafka acts as the backbone of the system, enabling asynchronous processing, loose coupling, fault tolerance, and scalability across all services.
+The architecture diagram illustrates the project's intended service flow and Kafka-based messaging design.
 
 ---
 
@@ -178,17 +165,17 @@ Kafka acts as the backbone of the system, enabling asynchronous processing, loos
 
 #### 🏠 Customer Dashboard
 <p align="center">
-  <img src="assets/customer_dashboard.png" width="800"/>
+  <img src="assets/customer_dashboard.png" width="800" alt="Customer dashboard"/>
 </p>
 
 #### 📤 Upload Financial Data
 <p align="center">
-  <img src="assets/customer_uploading.png" width="800"/>
+  <img src="assets/customer_uploading.png" width="800" alt="Customer financial data upload"/>
 </p>
 
 #### ⏳ Processing & Evaluation
 <p align="center">
-  <img src="assets/customer_processingpage.png" width="800"/>
+  <img src="assets/customer_processingpage.png" width="800" alt="Customer processing and evaluation"/>
 </p>
 
 ---
@@ -197,12 +184,12 @@ Kafka acts as the backbone of the system, enabling asynchronous processing, loos
 
 #### 📊 Manager Dashboard
 <p align="center">
-  <img src="assets/manager_dashboard.png" width="800"/>
+  <img src="assets/manager_dashboard.png" width="800" alt="Manager dashboard"/>
 </p>
 
 #### 🧾 Decision & Underwriting Page
 <p align="center">
-  <img src="assets/manager_decisionpage.png" width="800"/>
+  <img src="assets/manager_decisionpage.png" width="800" alt="Manager decision and underwriting page"/>
 </p>
 
 ---
@@ -210,7 +197,7 @@ Kafka acts as the backbone of the system, enabling asynchronous processing, loos
 ### 🤖 AI Chatbot
 
 <p align="center">
-  <img src="assets/chatbot.png" width="800"/>
+  <img src="assets/chatbot.png" width="800" alt="MonarchCredit chatbot"/>
 </p>
 
 ---
@@ -218,46 +205,64 @@ Kafka acts as the backbone of the system, enabling asynchronous processing, loos
 ## ⚙️ Tech Stack
 
 ### 🔹 Backend
-- FastAPI  
-- Kafka  
-- Python  
+- FastAPI
+- Kafka
+- Python
 
 ### 🔹 Machine Learning
-- XGBoost  
-- Random Forest  
-- LightGBM  
-- SHAP  
+- XGBoost
+- Random Forest
+- LightGBM
+- SHAP
 
 ### 🔹 Frontend
-- React.js  
+- React.js
 
 ### 🔹 Infrastructure
-- Docker  
-- ChromaDB  
+- Docker
+- ChromaDB
 
 ---
 
 ## 🚀 How to Run
 
+### 1. Clone the repository
+
 ```bash
-git clone https://github.com/AryanP03/monarchcredit_ai-powered-alternate-credit-scoring.git
-cd monarchcredit
-
-cd alternate_credit_backend
-docker compose up -d
-
-
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-
-
-cd ../alternate_credi_frontend
-npm install
-npm run dev
-
+git clone https://github.com/Rishi-1612/AI-credit-scoring-system.git
+cd AI-credit-scoring-system
 ```
 
+### 2. Start the backend services
+
+```bash
+cd alternate_credit_backend
+docker compose up -d
+```
+
+### 3. Install Python dependencies and start the API
+
+Run these commands from the `alternate_credit_backend` directory:
+
+```bash
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+### 4. Start the frontend
+
+Open a new terminal from the repository root:
+
+```bash
+cd alternate_credit_frontend
+npm install
+npm run dev
+```
+
+Check the backend configuration and environment variables before running the application locally. Some services may require additional setup depending on your environment.
+
 ---
+
 ## 📄 License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -268,11 +273,8 @@ See the full license here: [LICENSE](./LICENSE)
 
 ---
 
-### 📌 Summary
+## 📌 Project Notes
 
-| Permissions | Conditions | Limitations |
-| :--- | :--- | :--- |
-| ✅ Commercial use | ℹ️ License and copyright notice | ❌ Liability |
-| ✅ Modification | ℹ️ Include original license | ❌ Warranty |
-| ✅ Distribution | | |
-| ✅ Private use | | |
+- Account Aggregator inputs are simulated rather than connected to a live financial-data provider.
+- Model outputs depend on the available data, feature processing, and trained model artifacts.
+- This repository is a project implementation and should not be treated as a production lending or regulatory-compliance system without further validation.
