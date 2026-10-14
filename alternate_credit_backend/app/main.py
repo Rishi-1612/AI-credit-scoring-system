@@ -29,16 +29,6 @@ def get_db_connection():
 
 app = FastAPI(title="Alternate Credit Scoring API")
 
-import mysql.connector
-
-# DB Connection Helper
-"""def get_db_connection():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",      # Your MySQL username
-        password="aryan123",  # Your MySQL password
-        database="auditdb"
-    )"""
 
 # Create one service object for each flow
 individual_ingestion_service = IndividualIngestionService()
